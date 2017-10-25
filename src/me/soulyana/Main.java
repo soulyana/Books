@@ -11,6 +11,7 @@ public class Main {
 
         Book book = new Book();
         Chapters chapters;
+        String cTitle, pTitle;
         Pages pages;
 
         System.out.println("Welcome to your book editor!");
@@ -24,9 +25,9 @@ public class Main {
             chapters = new Chapters();
 
             System.out.println("Enter the title of the chapter:");
-            chapters.setTitle(scan.nextLine());
-            /*System.out.println("How many chapters will this book have?");
-            length1 = scan.nextInt();*/
+            cTitle = scan.nextLine();
+            chapters.setTitle(cTitle);
+            book.addChapter(chapters);
 
             System.out.println();
             System.out.println("~~~You can enter multiple pages~~~");
@@ -34,21 +35,23 @@ public class Main {
                 pages = new Pages();
 
                 System.out.println("What is this page about?");
-                pages.setTitle(scan.nextLine());
-                /*System.out.println("How many pages will this chapter have?");
-                length2 = scan.nextInt();*/
-
+                pTitle = scan.nextLine();
+                pages.setTitle(pTitle);
                 chapters.addPages(pages);
 
-                System.out.println("Would you like to add another page?");
+                do {
+                    System.out.println("Would you like to add another page? (Y)es or (N)o");
+                    ans = scan.nextLine();
+                } while (!ans.equalsIgnoreCase("y") && !ans.equalsIgnoreCase("n"));
+
+            } while (ans.equalsIgnoreCase("y") && !ans.equalsIgnoreCase("n"));
+
+            do {
+                System.out.println("Would you like to add another chapter?");
                 ans = scan.nextLine();
-            }while(ans.equalsIgnoreCase("y") && !ans.equalsIgnoreCase("n"));
+            } while(!ans.equalsIgnoreCase("y") && !ans.equalsIgnoreCase("n"));
 
-            book.addChapter(chapters);
-
-            System.out.println("Would you like to add another chapter?");
-            ans = scan.nextLine();
-        }while(ans.equalsIgnoreCase("y") && !ans.equalsIgnoreCase("n"));
+        } while(ans.equalsIgnoreCase("y") && !ans.equalsIgnoreCase("n"));
 
         System.out.println();
         System.out.println("Book Title: " + book.getTitle());
